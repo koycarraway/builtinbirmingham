@@ -8,7 +8,6 @@ set :site_title, 'Built In Birmingham'
 set :site_url, 'https://www.builtinbirmingham.com'
 set :url_root, 'https://www.builtinbirmingham.com'
 set :css_dir, 'assets/stylesheets'
-set :js_dir, 'assets/javascripts'
 set :images_dir, 'assets/images'
 set :fonts_dir, 'assets/fonts'
 set :trailing_slash, false
@@ -53,7 +52,9 @@ page '/*.txt', layout: false
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 
-# configure :build do
-#   activate :minify_css
-#   activate :minify_javascript
-# end
+configure :build do
+  activate :minify_css
+end
+
+# Disable warnings
+Haml::TempleEngine.disable_option_validator!
