@@ -1,0 +1,29 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"}
+    %title= current_page.data.title
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+
+    - if current_page.data.description
+      %meta{:content => current_page.data.description, :name => "description"}/
+    - if current_page.data.noindex == true
+      %meta{ :name => "robots", :content => "noindex,nofollow"}
+
+    - if content_for?(:head)
+      = yield_content :head
+
+    = stylesheet_link_tag 'all'
+
+    %link{:href => image_path('favicon.png'), :rel => "shortcut icon"}/
+    %link{:href => image_path('favicon.ico'), :rel => "icon", :type => "image/ico"}/
+
+  %body{:class => page_classes}
+    = yield
+    
+    = javascript_include_tag 'all'
+    - if content_for?(:javascript)
+      = yield_content :javascript
